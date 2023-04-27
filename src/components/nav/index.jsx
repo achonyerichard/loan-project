@@ -1,0 +1,56 @@
+import { useContext } from "react";
+import { SideContext } from "../../contexts/SideContext";
+
+
+function Header() {
+  const { sidebarOpen, setSidebarOpen } = useContext(SideContext);
+
+  return (
+    <header className="sticky top-0 bg-white border-b border-slate-200 z-50 ">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-24 -mb-px">
+          {/* Header: Left side */}
+          <div className="flex">
+            {/* Hamburger button */}
+            <button
+              className="text-slate-500 hover:text-slate-600 lg:hidden"
+              aria-controls="sidebar"
+              aria-expanded={sidebarOpen}
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              <span className="sr-only">Open sidebar</span>
+              <svg
+                className="w-6 h-6 fill-current"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="4" y="5" width="16" height="2" />
+                <rect x="4" y="11" width="16" height="2" />
+                <rect x="4" y="17" width="16" height="2" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Header: Right side */}
+          <ul className="flex items-center justify-center space-x-10 md:space-x-[100px]">
+            <li className="flex cursor-pointer">
+            <button
+            //   disabled={loading}
+              
+                className=" text-lg bg-[color:#194383] text-white rounded px-12 py-2 bg-gradient-to-r from-[#6DBF58] to-[#1E4CA0]"
+                
+              >
+               Logout
+              </button>
+            </li>
+            
+
+          
+          </ul>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default Header;
