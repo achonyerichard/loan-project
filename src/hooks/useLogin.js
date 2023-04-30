@@ -10,7 +10,7 @@ const useLogin = (props) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
-  // const  { dispatch }  = useAuthContext()
+
   const { dispatch } = useAuthContext();
   // console.log("PROPS", props);
 
@@ -21,21 +21,21 @@ const useLogin = (props) => {
       `https://thriftandloan.onrender.com/api/signin`,
       { email, password }
     );
-    const json = response;
-    console.log("ress", json);
-    if (json.err) {
+    const res = response.data;
+    console.log("ress", res);
+    if (res.err) {
       setLoading(false);
-      setError(json.err);
+      setError(res.err);
     }
-    if (!json.err) {
+    if (!res.err) {
       setLoading(true);
       console.log("welcome");
 
-      // localStorage.setItem("user", JSON.stringify(json.beneficiary));
+      localStorage.setItem("user", JSON.stringify(res));
 
-      dispatch({ type: "LOGIN", payload: json.beneficiary });
+      dispatch({ type: "LOGIN", payload: res });
       setLoading(false);
-      navigate("/");
+      navigate("/home");
     }
   };
 

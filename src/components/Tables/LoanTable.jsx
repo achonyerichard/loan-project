@@ -1,4 +1,10 @@
+import useApi from "../../hooks/useApi";
+
 const LoanTable = () => {
+  const [data, isLoading, error] = useApi(
+    "https://thriftandloan.onrender.com/api/loan/myloan"
+  );
+  console.log("dattt", data, isLoading, error);
   return (
     <>
       {" "}

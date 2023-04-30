@@ -1,8 +1,14 @@
 import { useContext } from "react";
 import { SideContext } from "../../contexts/SideContext";
+import useLogout from "../../hooks/useLogout";
 
 
 function Header() {
+  const {logout} = useLogout()
+
+  const handleLogout =()=>{
+    logout()
+  }
   const { sidebarOpen, setSidebarOpen } = useContext(SideContext);
 
   return (
@@ -36,7 +42,7 @@ function Header() {
             <li className="flex cursor-pointer">
             <button
             //   disabled={loading}
-              
+              onClick={handleLogout}
                 className=" text-lg bg-[color:#194383] text-white rounded px-12 py-2 bg-gradient-to-r from-[#6DBF58] to-[#1E4CA0]"
                 
               >

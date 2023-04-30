@@ -1,16 +1,25 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuthContext } from './useAuthContext';
 
 function useApi(url) {
+  const user = useAuthContext();
+  const token = user?.user?.data?.token;
+console.log("omo",token);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get(url)
+    axios.get(url, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
       .then(response => {
         setData(response.data);
+     
         setIsLoading(false);
       })
       .catch(error => {
