@@ -29,7 +29,7 @@ const Register = () => {
   reversedDate = `${reversedDate[2]}-${reversedDate[0].padStart(2, 0)}-${
     reversedDate[1]
   }`;
-  console.log(reversedDate);
+
   const data = {
     firstname: firstName,
     lastname: lastName,
@@ -45,7 +45,7 @@ const Register = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     await signup(data);
-    console.log("DATA", data);
+
   }
 
   useEffect(() => {
@@ -54,8 +54,7 @@ const Register = () => {
     );
 
     setFilteredLga(filteredStates[0]?.lgas);
-    console.log(typeof filteredStates[0]?.lgas);
-    console.log(filteredStates[0]?.lgas);
+    
   }, [selectedState, states]);
 
   const handleDateChange = (event) => {

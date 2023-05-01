@@ -12,7 +12,7 @@ const useLogin = (props) => {
   const [loading, setLoading] = useState(null);
 
   const { dispatch } = useAuthContext();
-  // console.log("PROPS", props);
+
 
   const login = async (email, password) => {
     setError(null);
@@ -22,14 +22,14 @@ const useLogin = (props) => {
       { email, password }
     );
     const res = response.data;
-    console.log("ress", res);
+
     if (res.err) {
       setLoading(false);
       setError(res.err);
     }
     if (!res.err) {
       setLoading(true);
-      console.log("welcome");
+  
 
       localStorage.setItem("user", JSON.stringify(res));
 

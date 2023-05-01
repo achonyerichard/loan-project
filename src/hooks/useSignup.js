@@ -15,13 +15,13 @@ const useSignUp = (props) => {
   const signup = async (data) => {
     setIsLoading(true);
     setError(null);
-    console.log("hi", data);
+  
     const response = await axios.post(
       `https://thriftandloan.onrender.com/api/member/register`,
       data
     );
-    const res = response;
-    console.log(res);
+    const res = response.data;
+
     if (res.err) {
       setIsLoading(false);
       setError(res.err);

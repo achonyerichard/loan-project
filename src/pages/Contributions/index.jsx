@@ -1,23 +1,22 @@
-import LoanTable from "../../components/Tables/LoanTable";
+
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState } from "react";
-import useApi from "../../hooks/useApi";
 
-const Home = () => {
+
+const Contributions = () => {
   const [amount, setAmount] = useState("");
   const [term, setTerm] = useState("");
   const [collateral, setColleteral] = useState("");
+ 
 
-  const [data] = useApi(
-    "https://thriftandloan.onrender.com/api/member/userprofile"
-  );
 
   const user = useAuthContext();
   const token = user?.user?.token;
-  const name = data?.firstname;
+
 
   async function handleSubmit(e) {
+  
     e.preventDefault();
 
     await axios
@@ -32,9 +31,11 @@ const Home = () => {
       )
       .then((result) => {
         console.log("Post request, results", result);
+  
       })
       .catch((error) => {
         console.log("Errors", error);
+  
       });
   }
 
@@ -43,7 +44,7 @@ const Home = () => {
       <main className="bg-white  p-5 lg:p-10">
         <header>
           <h1 className="text-4xl font-semibold text-[#1E4CA1]">
-            Welcome {name},
+           Start Contributing
           </h1>
         </header>
         <form onSubmit={handleSubmit}>
@@ -92,23 +93,19 @@ const Home = () => {
               </div>
 
               <div className=" pt-2 md:pt-5  rounded-b-lg border-t border-gray-200 flex justify-end">
-                <button
-                  className={
-                    "bg-gradient-to-r from-[#6DBF58] to-[#1E4CA0] hover:bg-gradient-to-l hover:from-[#6DBF58] hover:to-[#1E4CA0] transition-colors ease-in-out rounded-md text-white px-4 py-2 flex justify-center"
-                  }
-                >
-                  Submit
+                <button  className={ "bg-gradient-to-r from-[#6DBF58] to-[#1E4CA0] hover:bg-gradient-to-l hover:from-[#6DBF58] hover:to-[#1E4CA0] transition-colors ease-in-out rounded-md text-white px-4 py-2 flex justify-center"}>
+                Submit
                 </button>
               </div>
             </div>
           </div>
         </form>
-        <div className="pt-10">
+        {/* <div className="pt-10">
           <LoanTable />
-        </div>
+        </div> */}
       </main>
     </>
   );
 };
 
-export default Home;
+export default Contributions;

@@ -4,7 +4,7 @@ import { useAuthContext } from './useAuthContext';
 
 function useApi(url) {
   const user = useAuthContext();
-  const token = user?.user?.data?.token;
+  const token = user?.user?.token;
 console.log("omo",token);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

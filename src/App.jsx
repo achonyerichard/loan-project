@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Layout from "./components/Layout";
 
 import { useAuthContext } from "./hooks/useAuthContext";
+import Contributions from "./pages/Contributions";
+import Profile from "./pages/Profile";
 
 function App() {
  
@@ -17,6 +19,8 @@ function App() {
       <Route path="/register" element={!user ?<Register />: <Navigate to="home"/>} />
       <Route path="/" element={user ?<Layout />: <Navigate to="/"/>}>
         <Route path="home" element={user ?<Home />: <Navigate to="/"/>} />
+        <Route path="contributions" element={user ?<Contributions />: <Navigate to="/"/>} />
+        <Route path="profile" element={user ?<Profile />: <Navigate to="/"/>} />
       </Route>
     </Routes>
   );
