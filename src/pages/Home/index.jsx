@@ -12,7 +12,7 @@ const Home = () => {
   const [data] = useApi(
     "https://thriftandloan.onrender.com/api/member/userprofile"
   );
-
+console.log(data);
   const user = useAuthContext();
   const token = user?.user?.token;
   const name = data?.firstname;
@@ -46,7 +46,7 @@ const Home = () => {
             Welcome {name},
           </h1>
         </header>
-        <form onSubmit={handleSubmit}>
+       {data?.has_loan?<h1 className="text-black text-xl pt-5">Sorry you have an unpaid load</h1> :<form onSubmit={handleSubmit}>
           <div className="w-full  rounded-lg mx-auto  flex overflow-hidden  rounded-b-none ">
             <div className=" md:w-1/2 mt-10 md:mt-0">
               <hr className="border-gray-200" />
@@ -102,7 +102,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </form>
+        </form>}
         <div className="pt-10">
           <LoanTable />
         </div>

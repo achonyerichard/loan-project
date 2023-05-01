@@ -1,13 +1,17 @@
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState } from "react";
+import useApi from "../../hooks/useApi";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
 
-  const [enabled, setEnabled] = useState(true);
+  const [data] = useApi(
+    "https://thriftandloan.onrender.com/api/member/userprofile"
+  );
+console.log(data);
 
   const user = useAuthContext();
   const token = user?.user?.token;
@@ -55,12 +59,12 @@ const Profile = () => {
                   First Name
                 </label>
                 <input
-                  placeholder={user?.user?.firstname}
+                  placeholder={data?.firstname}
                   className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
                   type="text"
                   name="firstname"
                   value={firstName}
-                  disabled={enabled}
+              
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
@@ -70,12 +74,12 @@ const Profile = () => {
                   Last Name
                 </label>
                 <input
-                  placeholder={user?.user?.lastname}
+                  placeholder={data?.lastname}
                   className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
                   type="text"
                   name="lastname"
                   value={lastName}
-                  disabled={enabled}
+              
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
@@ -89,21 +93,11 @@ const Profile = () => {
                   type="password"
                   name="password"
                   value={password}
-                  disabled={enabled}
+              
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="flex">
-                <div className=" pt-2 md:pt-5  rounded-b-lg border-t border-gray-200 flex justify-start flex-grow">
-                  <button
-                    className={
-                      "bg-gradient-to-r from-[#1E4CA0] to-[#6DBF58] hover:bg-gradient-to-l hover:from-[#6DBF58] hover:to-[#1E4CA0] transition-colors ease-in-out rounded-md text-white px-4 py-2 flex justify-center"
-                    }
-                    onClick={()=>setEnabled(false)}
-                  >
-                    Edit
-                  </button>
-                </div>
+            
                 <div className=" pt-2 md:pt-5  rounded-b-lg border-t border-gray-200 flex justify-end">
                   <button
                     className={
@@ -116,7 +110,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-          </div>
+         
         </form>
         {/* <div className="pt-10">
           <LoanTable />

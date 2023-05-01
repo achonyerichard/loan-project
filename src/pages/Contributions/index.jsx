@@ -2,12 +2,13 @@
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState } from "react";
+import ContributionTable from "../../components/Tables/ContributionTable";
 
 
 const Contributions = () => {
   const [amount, setAmount] = useState("");
-  const [term, setTerm] = useState("");
-  const [collateral, setColleteral] = useState("");
+  const [transId, setTransId] = useState("");
+  const [paymentType, setPaymentType] = useState("");
  
 
 
@@ -21,8 +22,8 @@ const Contributions = () => {
 
     await axios
       .post(
-        `https://thriftandloan.onrender.com/api/loan/apply/`,
-        { amount: amount, term: term, collateral: collateral },
+        `https://thriftandloan.onrender.com/api/transaction/deposit`,
+        { amount: amount, transactionCode: transId, paymentType:paymentType },
         {
           headers: {
             "x-auth-token": token,
@@ -53,7 +54,7 @@ const Contributions = () => {
               <hr className="border-gray-200" />
               <div className="py-4 ">
                 <label htmlFor="amount" className="text-sm text-black">
-                  Loan Amount
+                 Amount
                 </label>
                 <input
                   placeholder="Amount in Naira"
@@ -67,29 +68,38 @@ const Contributions = () => {
               <hr className="border-gray-200" />
               <div className="py-4 ">
                 <label htmlFor="term" className="text-sm text-black">
-                  Duration in days
+                  Transaction ID
                 </label>
                 <input
                   placeholder="Loan Duration"
                   className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
                   type="number"
                   name="term"
-                  value={term}
-                  onChange={(e) => setTerm(e.target.value)}
+                  value={transId}
+                  onChange={(e) => setTransId(e.target.value)}
                 />
               </div>
               <div className="py-4 ">
-                <label htmlFor="collateral" className="text-sm text-black">
-                  Collateral
+              <div className="flex flex-col ">
+                <label
+                  htmlFor="savings"
+                  className="text-black text-sm font-semibold pb-2"
+                >
+                  Payment Type:
                 </label>
-                <input
-                  placeholder="e.g. car, house,..."
-                  className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
-                  type="text"
-                  name="collateral"
-                  value={collateral}
-                  onChange={(e) => setColleteral(e.target.value)}
-                />
+                <select
+                  name="savings"
+                  id=""
+                  className=" text-center  bg-gray-200   w-full border rounded placeholder:text-md placeholder:text-black  py-2 text-black transition focus:outline-none"
+                  onChange={(e) => setPaymentType(e.target.value)}
+                  required
+                >
+                  <option value="">Select your Type</option>
+                  <option value="Transfer">Transfer</option>
+                  <option value="Deposit">Deposit</option>
+                 
+                </select>
+              </div>
               </div>
 
               <div className=" pt-2 md:pt-5  rounded-b-lg border-t border-gray-200 flex justify-end">
@@ -100,9 +110,9 @@ const Contributions = () => {
             </div>
           </div>
         </form>
-        {/* <div className="pt-10">
-          <LoanTable />
-        </div> */}
+        <div className="pt-10">
+          <ContributionTable />
+        </div>
       </main>
     </>
   );
