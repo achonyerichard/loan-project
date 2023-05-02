@@ -12,11 +12,10 @@ const Home = () => {
   const [data] = useApi(
     "https://thriftandloan.onrender.com/api/member/userprofile"
   );
-console.log(data);
+console.log("hmm",data);
   const user = useAuthContext();
   const token = user?.user?.token;
-  const name = data?.firstname;
-
+ 
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -43,7 +42,7 @@ console.log(data);
       <main className="bg-white  p-5 lg:p-10">
         <header>
           <h1 className="text-4xl font-semibold text-[#1E4CA1]">
-            Welcome {name},
+           Apply for loan
           </h1>
         </header>
        {data?.has_loan?<h1 className="text-black text-xl pt-5">Sorry you have an unpaid load</h1> :<form onSubmit={handleSubmit}>

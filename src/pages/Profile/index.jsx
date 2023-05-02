@@ -15,6 +15,7 @@ console.log(data);
 
   const user = useAuthContext();
   const token = user?.user?.token;
+  const name = data?.firstname;
 
 
   async function handleSubmit(e) {
@@ -45,9 +46,9 @@ console.log(data);
   return (
     <>
       <main className="bg-white  p-5 lg:p-10">
-        <header>
+      <header>
           <h1 className="text-4xl font-semibold text-[#1E4CA1]">
-            Edit Profile
+            Welcome {name},
           </h1>
         </header>
         <form >

@@ -35,7 +35,7 @@ const useLogin = (props) => {
 
       dispatch({ type: "LOGIN", payload: res });
       setLoading(false);
-      navigate("/home");
+      navigate("/profile");
     }
   };
 

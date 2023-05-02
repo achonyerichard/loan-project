@@ -7,20 +7,37 @@ import Layout from "./components/Layout";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Contributions from "./pages/Contributions";
 import Profile from "./pages/Profile";
+import ViewContributions from "./pages/ViewContribution";
+import UnAuthorized from "./pages/Unauthorized";
 
 function App() {
- 
-
   const { user } = useAuthContext();
 
   return (
     <Routes>
-      <Route index element={!user ?<SignIn /> :<Navigate to="home"/>} />
-      <Route path="/register" element={!user ?<Register />: <Navigate to="home"/>} />
-      <Route path="/" element={user ?<Layout />: <Navigate to="/"/>}>
-        <Route path="home" element={user ?<Home />: <Navigate to="/"/>} />
-        <Route path="contributions" element={user ?<Contributions />: <Navigate to="/"/>} />
-        <Route path="profile" element={user ?<Profile />: <Navigate to="/"/>} />
+      <Route index element={!user ? <SignIn /> : <Navigate to="profile" />} />
+      <Route
+        path="/register"
+        element={!user ? <Register /> : <Navigate to="profile" />}
+      />
+      <Route path="/unauthorized" element={<UnAuthorized />} />
+      <Route path="/" element={user ? <Layout /> : <Navigate to="/" />}>
+        <Route
+          path="profile"
+          element={user ? <Profile /> : <Navigate to="/" />}
+        />
+        {!user?.admin && (
+          <Route path="home" element={user ? <Home /> : <Navigate to="/" />} />
+        )}
+        <Route
+          path="contributions"
+          element={user ? <Contributions /> : <Navigate to="/" />}
+        />
+
+        <Route
+          path="view-contribution"
+          element={user ? <ViewContributions /> : <Navigate to="/" />}
+        />
       </Route>
     </Routes>
   );
