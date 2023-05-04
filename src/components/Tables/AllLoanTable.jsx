@@ -3,7 +3,7 @@ import useApi from "../../hooks/useApi";
 
 
 // eslint-disable-next-line react/prop-types
-const AllContributionTable = ({setContributionModal}) => {
+const AllLoanTable = ({setLoanModal}) => {
   const [data, isLoading, error] = useApi(
     "https://thriftandloan.onrender.com/api/transaction/alltransaction"
   );
@@ -11,7 +11,7 @@ const AllContributionTable = ({setContributionModal}) => {
 
   
   const modalClick =()=>{
-    setContributionModal(true)
+    setLoanModal(true)
     // console.log(id);
   }
   return (
@@ -20,7 +20,7 @@ const AllContributionTable = ({setContributionModal}) => {
       <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
         <header className="py-4 text-center">
           <h1 className="text-2xl font-semibold text-[#1E4CA1]">
-            User Contributions
+            User Loans
           </h1>
         </header>
         <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
@@ -125,4 +125,4 @@ const AllContributionTable = ({setContributionModal}) => {
   );
 };
 
-export default AllContributionTable;
+export default AllLoanTable;

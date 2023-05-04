@@ -3,15 +3,15 @@ import useApi from "../../hooks/useApi";
 
 
 // eslint-disable-next-line react/prop-types
-const AllContributionTable = ({setContributionModal}) => {
+const UsersTable = ({setUsersModal}) => {
   const [data, isLoading, error] = useApi(
-    "https://thriftandloan.onrender.com/api/transaction/alltransaction"
+    "https://thriftandloan.onrender.com/api/member/alluser"
   );
-  console.log("allcontru", data, isLoading, error);
+  console.log("users", data, isLoading, error);
 
   
   const modalClick =()=>{
-    setContributionModal(true)
+    setUsersModal(true)
     // console.log(id);
   }
   return (
@@ -20,7 +20,7 @@ const AllContributionTable = ({setContributionModal}) => {
       <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
         <header className="py-4 text-center">
           <h1 className="text-2xl font-semibold text-[#1E4CA1]">
-            User Contributions
+            Users
           </h1>
         </header>
         <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
@@ -31,19 +31,22 @@ const AllContributionTable = ({setContributionModal}) => {
                    ID
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Amount
+                  Name
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                   Date
+                   Email
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Type
+                  Gender
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Trans. Id
+                  Role
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Status
+                  State
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  Lga
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100"></th>
               </tr>
@@ -62,44 +65,33 @@ const AllContributionTable = ({setContributionModal}) => {
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {item?.amount}
+                      {`${item?.firstname } ${item?.lastname}`}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {new Date(item?.date).toLocaleString()}
+                      {item?.email}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {item?.payment_type}
+                      {item?.gender}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {item?.transaction_code}
+                      {item?.isAdmin ?"Admin":"User"}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span
-                      className={
-                        item?.status === "approved"
-                          ? "relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
-                          : "relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight"
-                      }
-                    >
-                      <span
-                        aria-hidden
-                        className={
-                          item?.status === "approved"
-                            ? "absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                            : "absolute inset-0 bg-yellow-200 opacity-50 rounded-full"
-                        }
-                      ></span>
-                      <span className="relative capitalize">
-                        {item?.status}
-                      </span>
-                    </span>
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {item?.state }
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                      {item?.lga }
+                    </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
                    <button
@@ -125,4 +117,4 @@ const AllContributionTable = ({setContributionModal}) => {
   );
 };
 
-export default AllContributionTable;
+export default UsersTable;

@@ -9,6 +9,8 @@ import Contributions from "./pages/Contributions";
 import Profile from "./pages/Profile";
 import ViewContributions from "./pages/ViewContribution";
 import UnAuthorized from "./pages/Unauthorized";
+import ViewLoans from "./pages/ViewLoans";
+import ViewUsers from "./pages/ViewUsers";
 
 function App() {
   const { user } = useAuthContext();
@@ -37,6 +39,14 @@ function App() {
         <Route
           path="view-contribution"
           element={user ? <ViewContributions /> : <Navigate to="/" />}
+        />
+         <Route
+          path="view-loans"
+          element={user ? <ViewLoans /> : <Navigate to="/" />}
+        />
+          <Route
+          path="users"
+          element={user ? <ViewUsers /> : <Navigate to="/" />}
         />
       </Route>
     </Routes>
