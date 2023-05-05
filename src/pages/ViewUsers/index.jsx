@@ -4,10 +4,17 @@ import { ModalsContext } from "../../contexts/ModalsContext";
 
 import UsersTable from "../../components/Tables/UsersTable";
 import UsersModal from "../../components/Modals/UsersModal";
+import useApi from "../../hooks/useApi";
+import UserCards from "../../components/Cards/UserCards";
 
 
 const ViewUsers = () => {
-    const { usersModal,setUsersModal} = useContext(ModalsContext);
+  const [data] = useApi(
+    "https://thriftandloan.onrender.com/api/member/alluser"
+  );
+  console.log("users", data, );
+
+    const { usersModal,setUsersModal,usersId,setUsersId} = useContext(ModalsContext);
    
   return (
     <>
@@ -17,9 +24,12 @@ const ViewUsers = () => {
             Welcome,
           </h1>
         </header> */}
-     <UsersModal loanModal={usersModal}  setUsersModal={setUsersModal}/>
+        <div>
+          <UserCards data={data}/>
+        </div>
+     <UsersModal usersModal={usersModal}  setUsersModal={setUsersModal} id={usersId}/>
         <div className="pt-10">
-          <UsersTable setUsersModal={setUsersModal}/>
+          <UsersTable setUsersModal={setUsersModal} data={data} setUsersId={setUsersId}/>
         </div>
       </main>
     </>

@@ -1,8 +1,34 @@
+import axios from "axios";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 
 // eslint-disable-next-line react/prop-types
-const UsersModal = ({setUsersModal,usersModal}) => {
+const UsersModal = ({setUsersModal,usersModal,id}) => {
+  const user = useAuthContext();
+  const token = user?.user?.token;
+  async function handleSubmit(e) {
+    e.preventDefault();
 
+    await axios
+      .put(
+        `https://thriftandloan.onrender.com/api/member/approve/${id}`,
+        { status:"approve" },
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("Post request, results", result);
+       setUsersModal(false)
+      })
+      .catch((error) => {
+        console.log("Errors", error);
+        setUsersModal(false)
+      });
+  }
+console.log("id",id);
     return (
       <>
         {usersModal && (
@@ -54,7 +80,7 @@ const UsersModal = ({setUsersModal,usersModal}) => {
                   </span>
                   <span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
                     <button
-                      onClick={() => setUsersModal(false)}
+                      onClick={handleSubmit}
                       type="button"
                       className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-green-600 text-white leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5"
                     >
