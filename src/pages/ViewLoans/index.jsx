@@ -8,7 +8,7 @@ import LoanCards from "../../components/Cards/LoanCard";
 
 const ViewLoans = () => {
   const [data] = useApi(
-    "https://thriftandloan.onrender.com/api/transaction/alltransaction"
+    "https://thriftandloan.onrender.com/api/loan/allloan"
   );
   console.log("loan", data);
 

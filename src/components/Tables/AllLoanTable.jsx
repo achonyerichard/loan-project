@@ -21,17 +21,18 @@ const AllLoanTable = ({ setLoanModal, data,setLoanId }) => {
                   ID
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  Name
+                </th>
+                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                   Amount
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Date
+                Due  Date
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Type
+                  Collateral
                 </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                  Trans. Id
-                </th>
+                
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                   Status
                 </th>
@@ -53,28 +54,29 @@ const AllLoanTable = ({ setLoanModal, data,setLoanId }) => {
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
+                      {`${item?.firstname} ${item?.lastname}`}
+                    </p>
+                  </td>
+                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
                       {item?.amount}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {new Date(item?.date).toLocaleString()}
+                      {new Date(item?.end_date).toLocaleString()}
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {item?.payment_type}
+                      {item?.collateral}
                     </p>
                   </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
-                      {item?.transaction_code}
-                    </p>
-                  </td>
+                  
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <span
                       className={
-                        item?.status === "confirmed"
+                        item?.status === "active"
                           ? "relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
                           : "relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight"
                       }
@@ -82,7 +84,7 @@ const AllLoanTable = ({ setLoanModal, data,setLoanId }) => {
                       <span
                         aria-hidden
                         className={
-                          item?.status === "confirmed"
+                          item?.status === "active"
                             ? "absolute inset-0 bg-green-200 opacity-50 rounded-full"
                             : "absolute inset-0 bg-yellow-200 opacity-50 rounded-full"
                         }
@@ -93,7 +95,7 @@ const AllLoanTable = ({ setLoanModal, data,setLoanId }) => {
                     </span>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                   {item?.status != "confirmed" && <button
+                   {item?.status.toLowerCase() === "pending" && <button
                       type="button"
                       className="inline-block text-gray-500 hover:text-gray-700"
                       onClick={()=>modalClick(item?.id)}

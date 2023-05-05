@@ -62,7 +62,7 @@ const ContributionTable = () => {
                     </p>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">
+                    <p className="text-gray-900 whitespace-no-wrap capitalize">
                       {item?.payment_type}
                     </p>
                   </td>
@@ -74,7 +74,7 @@ const ContributionTable = () => {
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <span
                       className={
-                        item?.status === "approved"
+                        item?.status === "confirmed"
                           ? "relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
                           : "relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight"
                       }
@@ -82,7 +82,7 @@ const ContributionTable = () => {
                       <span
                         aria-hidden
                         className={
-                          item?.status === "approved"
+                          item?.status === "confirmed"
                             ? "absolute inset-0 bg-green-200 opacity-50 rounded-full"
                             : "absolute inset-0 bg-yellow-200 opacity-50 rounded-full"
                         }

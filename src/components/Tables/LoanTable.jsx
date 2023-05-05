@@ -66,10 +66,10 @@ const LoanTable = () => {
                   
                  </td>
                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                   <span className={item?.status === "approved" ?"relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight":"relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight"}>
+                   <span className={item?.status === "active" ?"relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight":"relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight"}>
                      <span
                        aria-hidden
-                       className={item?.status === "approved" ? "absolute inset-0 bg-green-200 opacity-50 rounded-full":"absolute inset-0 bg-yellow-200 opacity-50 rounded-full"}
+                       className={item?.status === "active" ? "absolute inset-0 bg-green-200 opacity-50 rounded-full":"absolute inset-0 bg-yellow-200 opacity-50 rounded-full"}
                      ></span>
                      <span className="relative capitalize">{item?.status}</span>
                    </span>

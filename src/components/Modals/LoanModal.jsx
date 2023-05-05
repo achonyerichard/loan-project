@@ -11,8 +11,8 @@ const LoanModal = ({setLoanModal,loanModal,id}) => {
 
     await axios
       .put(
-        `https://thriftandloan.onrender.com/api/transaction/update/deposit/${id}`,
-        { status:"confirmed" },
+        `https://thriftandloan.onrender.com/api/loan/approve/${id}`,
+        { status:"active" },
         {
           headers: {
             "x-auth-token": token,
