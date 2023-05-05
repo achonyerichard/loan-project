@@ -94,8 +94,8 @@ const UsersTable = ({ setUsersModal, data, setUsersId }) => {
                      <span className="relative capitalize">{item?.status}</span>
                    </span>
                  </td>
-                 {item?.status !="approve" && <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                    <button
+                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
+                 {item?.status !="approve" && <button
                       type="button"
                       className="inline-block text-gray-500 hover:text-gray-700"
                       onClick={() => modalClick(item?.id)}
@@ -107,7 +107,8 @@ const UsersTable = ({ setUsersModal, data, setUsersId }) => {
                         <path d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
                       </svg>
                     </button>
-                  </td>}
+                  }
+                  </td>
                 </tr>
               ))}
             </tbody>

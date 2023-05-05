@@ -3,9 +3,15 @@ import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState } from "react";
 import ContributionTable from "../../components/Tables/ContributionTable";
-
+import useApi from "../../hooks/useApi";
+import UserContributionCards from "../../components/Cards/UserContributionCard";
 
 const Contributions = () => {
+  const [data] = useApi(
+    "https://thriftandloan.onrender.com/api/transaction/mycontribution"
+  );
+  console.log("contru", data);
+
   const [amount, setAmount] = useState("");
   const [transId, setTransId] = useState("");
   const [paymentType, setPaymentType] = useState("");
@@ -43,8 +49,12 @@ const Contributions = () => {
   return (
     <>
       <main className="bg-white  p-5 lg:p-10">
+       
+        <div>
+          <UserContributionCards data={data}/>
+        </div>
         <header>
-          <h1 className="text-4xl font-semibold text-[#1E4CA1]">
+          <h1 className="text-3xl font-semibold text-[#1E4CA1] pt-5">
            Start Contributing
           </h1>
         </header>
@@ -111,7 +121,7 @@ const Contributions = () => {
           </div>
         </form>
         <div className="pt-10">
-          <ContributionTable />
+          <ContributionTable data={data}/>
         </div>
       </main>
     </>

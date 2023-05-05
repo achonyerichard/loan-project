@@ -1,10 +1,16 @@
 import LoanTable from "../../components/Tables/LoanTable";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useApi from "../../hooks/useApi";
+import PayLoanModal from "../../components/Modals/PayLoanModal";
+import { ModalsContext } from "../../contexts/ModalsContext";
+import UserLoanCards from "../../components/Cards/UserLoanCard";
+
 
 const Home = () => {
+  const { userLoanModal, setUserLoanModal, setUserLoanId, userLoanId } =
+  useContext(ModalsContext);
   const [amount, setAmount] = useState("");
   const [term, setTerm] = useState("");
   const [collateral, setColleteral] = useState("");
@@ -13,6 +19,7 @@ const Home = () => {
     "https://thriftandloan.onrender.com/api/member/userprofile"
   );
 console.log("hmm",data);
+
   const user = useAuthContext();
   const token = user?.user?.token;
  
@@ -40,11 +47,13 @@ console.log("hmm",data);
   return (
     <>
       <main className="bg-white  p-5 lg:p-10">
+        <UserLoanCards/>
         <header>
-          <h1 className="text-4xl font-semibold text-[#1E4CA1]">
+          <h1 className="text-3xl font-semibold text-[#1E4CA1] pt-5">
            Apply for loan
           </h1>
         </header>
+        <PayLoanModal userLoanModal={userLoanModal} setUserLoanModal={setUserLoanModal} id={userLoanId}/>
        {data?.has_loan?<h1 className="text-black text-xl pt-5">Sorry you have an unpaid load</h1> :<form onSubmit={handleSubmit}>
           <div className="w-full  rounded-lg mx-auto  flex overflow-hidden  rounded-b-none ">
             <div className=" md:w-1/2 mt-10 md:mt-0">
@@ -103,7 +112,7 @@ console.log("hmm",data);
           </div>
         </form>}
         <div className="pt-10">
-          <LoanTable />
+          <LoanTable setUserLoanId={setUserLoanId} setUserLoanModal={setUserLoanModal}/>
         </div>
       </main>
     </>

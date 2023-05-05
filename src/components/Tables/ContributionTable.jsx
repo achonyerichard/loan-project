@@ -1,10 +1,8 @@
-import useApi from "../../hooks/useApi";
+/* eslint-disable react/prop-types */
 
-const ContributionTable = () => {
-  const [data, isLoading, error] = useApi(
-    "https://thriftandloan.onrender.com/api/transaction/mycontribution"
-  );
-  console.log("contru", data, isLoading, error);
+
+const ContributionTable = ({data}) => {
+
   return (
     <>
       {" "}

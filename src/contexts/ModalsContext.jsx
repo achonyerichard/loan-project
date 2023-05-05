@@ -15,6 +15,10 @@ export const ModalsContext = createContext({
   setLoanId: () => {},
   usersId: {},
   setUsersId: () => {},
+  userLoanId: {},
+  setUserLoanId: () => {},
+  userLoanModal: {},
+  setUserLoanModal: () => {},
 });
 
 export const ModalsProvider = ({ children }) => {
@@ -27,6 +31,8 @@ export const ModalsProvider = ({ children }) => {
   const [contributionId, setContributionId] = useState("");
   const [loanId, setLoanId] = useState("");
   const [usersId, setUsersId]=useState("")
+  const [userLoanId, setUserLoanId]=useState("")
+  const [userLoanModal,setUserLoanModal]=useState(false)
   useEffect(() => console.log("mod", contributionModal), []);
 
   const value = {
@@ -41,7 +47,12 @@ export const ModalsProvider = ({ children }) => {
     loanId,
     setLoanId,
     usersId,
-    setUsersId
+    setUsersId,
+    userLoanId,
+    setUserLoanId,
+    userLoanModal,
+    setUserLoanModal
+    
   };
   return (
     <ModalsContext.Provider value={value}>{children}</ModalsContext.Provider>
