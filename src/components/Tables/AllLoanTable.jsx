@@ -1,40 +1,30 @@
-
-import useApi from "../../hooks/useApi";
-
-
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line react/prop-types
-const AllLoanTable = ({setLoanModal}) => {
-  const [data, isLoading, error] = useApi(
-    "https://thriftandloan.onrender.com/api/transaction/alltransaction"
-  );
-  console.log("allcontru", data, isLoading, error);
-
+const AllLoanTable = ({ setLoanModal, data,setLoanId }) => {
+  const modalClick = (id) => {
+    setLoanId(id)
+    setLoanModal(true);
   
-  const modalClick =()=>{
-    setLoanModal(true)
-    // console.log(id);
-  }
+  };
   return (
     <>
       {" "}
       <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
         <header className="py-4 text-center">
-          <h1 className="text-2xl font-semibold text-[#1E4CA1]">
-            User Loans
-          </h1>
+          <h1 className="text-2xl font-semibold text-[#1E4CA1]">User Loans</h1>
         </header>
         <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
           <table className="min-w-full leading-normal">
             <thead>
               <tr>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                   ID
+                  ID
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                   Amount
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                   Date
+                  Date
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                   Type
@@ -49,6 +39,7 @@ const AllLoanTable = ({setLoanModal}) => {
               </tr>
             </thead>
             <tbody>
+           
               {data?.map((item, index) => (
                 <tr key={item?.id}>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -83,7 +74,7 @@ const AllLoanTable = ({setLoanModal}) => {
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <span
                       className={
-                        item?.status === "approved"
+                        item?.status === "confirmed"
                           ? "relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
                           : "relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight"
                       }
@@ -91,7 +82,7 @@ const AllLoanTable = ({setLoanModal}) => {
                       <span
                         aria-hidden
                         className={
-                          item?.status === "approved"
+                          item?.status === "confirmed"
                             ? "absolute inset-0 bg-green-200 opacity-50 rounded-full"
                             : "absolute inset-0 bg-yellow-200 opacity-50 rounded-full"
                         }
@@ -102,19 +93,19 @@ const AllLoanTable = ({setLoanModal}) => {
                     </span>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-                   <button
-                     type="button"
-                     className="inline-block text-gray-500 hover:text-gray-700"
-                     onClick={modalClick}
-                   >
-                     <svg
-                       className="inline-block h-6 w-6 fill-current"
-                       viewBox="0 0 24 24"
-                     >
-                       <path d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
-                     </svg>
-                   </button>
-                 </td>
+                   {item?.status != "confirmed" && <button
+                      type="button"
+                      className="inline-block text-gray-500 hover:text-gray-700"
+                      onClick={()=>modalClick(item?.id)}
+                    >
+                      <svg
+                        className="inline-block h-6 w-6 fill-current"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 6a2 2 0 110-4 2 2 0 010 4zm0 8a2 2 0 110-4 2 2 0 010 4zm-2 6a2 2 0 104 0 2 2 0 00-4 0z" />
+                      </svg>
+                    </button>}
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -3,10 +3,18 @@ import { ModalsContext } from "../../contexts/ModalsContext";
 import LoanModal from "../../components/Modals/LoanModal";
 import AllLoanTable from "../../components/Tables/AllLoanTable";
 
+import useApi from "../../hooks/useApi";
+import LoanCards from "../../components/Cards/LoanCard";
 
 const ViewLoans = () => {
-    const { loanModal,setLoanModal} = useContext(ModalsContext);
-   
+  const [data] = useApi(
+    "https://thriftandloan.onrender.com/api/transaction/alltransaction"
+  );
+  console.log("loan", data);
+
+  const { loanModal, setLoanModal, setLoanId, loanId } =
+    useContext(ModalsContext);
+
   return (
     <>
       <main className="bg-white  p-5 lg:p-10">
@@ -15,13 +23,24 @@ const ViewLoans = () => {
             Welcome,
           </h1>
         </header> */}
-     <LoanModal loanModal={loanModal}  setLoanModal={setLoanModal}/>
+        <div>
+          <LoanCards data={data} />
+        </div>
+        <LoanModal
+          loanModal={loanModal}
+          setLoanModal={setLoanModal}
+          id={loanId}
+        />
         <div className="pt-10">
-          <AllLoanTable setLoanModal={setLoanModal}/>
+          <AllLoanTable
+            setLoanModal={setLoanModal}
+            data={data}
+            setLoanId={setLoanId}
+          />
         </div>
       </main>
     </>
   );
-}
+};
 
-export default ViewLoans
+export default ViewLoans;
