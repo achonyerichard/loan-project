@@ -63,7 +63,7 @@ function Sidebar() {
             <ul className="space-y-4">
               {/* Dashboard */}
 
-            {!user?.user?.isAdmin &&  <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 `}>
+            {!user?.user?.isAdmin &&  <li onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 `}>
                 <NavLink
                   end
                   to="/home"
@@ -95,7 +95,7 @@ function Sidebar() {
               </li>}
 
              {!user?.user?.isAdmin && <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("@") && "text-[#14543D] font-bold text-xl"
                 }`}
               >
@@ -128,7 +128,7 @@ function Sidebar() {
                 </NavLink>
               </li>}
               {!user?.user?.isAdmin && <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("@") && "text-[#14543D] font-bold text-xl"
                 }`}
               >
@@ -161,7 +161,7 @@ function Sidebar() {
                 </NavLink>
               </li>}
               <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("profile") &&
                   "text-[#14543D] font-bold text-xl"
                 }`}
@@ -194,7 +194,7 @@ function Sidebar() {
                   </div>
                 </NavLink>
               </li>{user?.user?.isAdmin && <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("view-loans") &&
                   "text-[#14543D] font-bold text-xl"
                 }`}
@@ -228,7 +228,7 @@ function Sidebar() {
                 </NavLink>
               </li>}
               {user?.user?.isAdmin && <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("view-contribution") &&
                   "text-[#14543D] font-bold text-xl"
                 }`}
@@ -262,7 +262,7 @@ function Sidebar() {
                 </NavLink>
               </li>}
               {user?.user?.isAdmin && <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("view-withdrawals") &&
                   "text-[#14543D] font-bold text-xl"
                 }`}
@@ -296,7 +296,7 @@ function Sidebar() {
                 </NavLink>
               </li>}
               {user?.user?.isAdmin && <li
-                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                onClick={()=>setSidebarOpen(false)} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("view-loans") &&
                   "text-[#14543D] font-bold text-xl"
                 }`}
