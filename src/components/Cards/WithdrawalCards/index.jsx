@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 
-const LoanCards = ({ data }) => {
+const WithdrawalCards = ({ data }) => {
     console.log("go", data);
     const filterConfirmed = data.filter((item) => item.status === "confirmed");
     console.log(filterConfirmed);
-   
-
+    const totalSum = filterConfirmed.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.amount;
+    }, 0);
+    console.log(totalSum);
     return (
       <div>
         {" "}
@@ -29,8 +31,8 @@ const LoanCards = ({ data }) => {
             </div>
             <div>
            
-              <span className="block text-2xl font-bold text-gray-500">{data.length}</span>
-              <span className="block text-gray-800">Total Loans</span>
+              <span className="block text-2xl font-bold text-gray-500">{totalSum}</span>
+              <span className="block text-gray-800">Total Withdrawals</span>
               
             </div>
           </div>
@@ -53,7 +55,7 @@ const LoanCards = ({ data }) => {
             </div>
             <div>
             <span className="block text-2xl font-bold text-gray-500">{filterConfirmed.length}</span>
-              <span className="block text-gray-800">Confirmed Loans</span>
+              <span className="block text-gray-800">Confirmed Withdrawals</span>
             </div>
           </div>
           <div className="flex items-center p-8 bg-white shadow rounded-lg">
@@ -75,7 +77,7 @@ const LoanCards = ({ data }) => {
             </div>
             <div>
             <span className="block text-2xl font-bold text-gray-500">{data.length - filterConfirmed.length}</span>
-              <span className="block text-gray-800">Pending Loans</span>
+              <span className="block text-gray-800">Pending Withdrawals</span>
             </div>
           </div>
         </section>
@@ -83,5 +85,5 @@ const LoanCards = ({ data }) => {
     );
   };
   
-  export default LoanCards;
+  export default WithdrawalCards;
   

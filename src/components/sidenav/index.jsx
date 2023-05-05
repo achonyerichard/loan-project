@@ -60,7 +60,7 @@ function Sidebar() {
         <div className="space-y-12 px-5 mt-10">
           {/* Pages group */}
           <div>
-            <ul className="space-y-8">
+            <ul className="space-y-4">
               {/* Dashboard */}
 
             {!user?.user?.isAdmin &&  <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 `}>
@@ -127,6 +127,39 @@ function Sidebar() {
                   </div>
                 </NavLink>
               </li>}
+              {!user?.user?.isAdmin && <li
+                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                  pathname.includes("@") && "text-[#14543D] font-bold text-xl"
+                }`}
+              >
+                <NavLink
+                  end
+                  to="/withdraw"
+                  className={`block text-[#707070]  hover:text-[#E67719] pb-2 pt-2 truncate transition duration-150 ${
+                    pathname.includes("withdraw") && "hover:text-black"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`shrink-0 h-8 w-8 fill-slate-400  hover:fill-[#E67719] &&  ${
+                        pathname.includes("withdraw") && " fill-[#14543D]"
+                      } `}
+                      viewBox="0 0 512 512"
+                    >
+                      <path d="M172.2 226.8c-14.6-2.9-28.2 8.9-28.2 23.8V301c0 10.2 7.1 18.4 16.7 22 18.2 6.8 31.3 24.4 31.3 45 0 26.5-21.5 48-48 48s-48-21.5-48-48V120c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24v248c0 89.5 82.1 160.2 175 140.7 54.4-11.4 98.3-55.4 109.7-109.7 17.4-82.9-37-157.2-112.5-172.2zM209 0c-9.2-.5-17 6.8-17 16v31.6c0 8.5 6.6 15.5 15 15.9 129.4 7 233.4 112 240.9 241.5.5 8.4 7.5 15 15.9 15h32.1c9.2 0 16.5-7.8 16-17C503.4 139.8 372.2 8.6 209 0zm.3 96c-9.3-.7-17.3 6.7-17.3 16.1v32.1c0 8.4 6.5 15.3 14.8 15.9 76.8 6.3 138 68.2 144.9 145.2.8 8.3 7.6 14.7 15.9 14.7h32.2c9.3 0 16.8-8 16.1-17.3-8.4-110.1-96.5-198.2-206.6-206.7z" />
+                    </svg>
+                    <span
+                      className={`text-lg hover:font-black transition-transform  font-medium ml-3  2xl:opacity-100 duration-200 &&  ${
+                        pathname.includes("withdraw") &&
+                        " text-[#14543D] font-bold text-xl"
+                      } `}
+                    >
+                      Withdraw
+                    </span>
+                  </div>
+                </NavLink>
+              </li>}
               <li
                 className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("profile") &&
@@ -160,7 +193,40 @@ function Sidebar() {
                     </span>
                   </div>
                 </NavLink>
-              </li>
+              </li>{user?.user?.isAdmin && <li
+                className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
+                  pathname.includes("view-loans") &&
+                  "text-[#14543D] font-bold text-xl"
+                }`}
+              >
+                <NavLink
+                  end
+                  to="/view-loans"
+                  className={`block text-[#707070]  hover:text-[#E67719] pb-2 pt-2 truncate transition duration-150 ${
+                    pathname.includes("view-loans") && "hover:text-black"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 640 512"
+                      className={`shrink-0 h-8 w-8 fill-slate-400  hover:fill-[#E67719] &&  ${
+                        pathname.includes("view-loans") && " fill-[#14543D]"
+                      } `}
+                    >
+                      <path d="M608 320h-64v64h22.4c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8H96v-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h576c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32zm-96 64V64.3c0-17.9-14.5-32.3-32.3-32.3H160.4C142.5 32 128 46.5 128 64.3V384h384zM211.2 202l25.5-25.3c4.2-4.2 11-4.2 15.2.1l41.3 41.6 95.2-94.4c4.2-4.2 11-4.2 15.2.1l25.3 25.5c4.2 4.2 4.2 11-.1 15.2L300.5 292c-4.2 4.2-11 4.2-15.2-.1l-74.1-74.7c-4.3-4.2-4.2-11 0-15.2z" />
+                    </svg>
+                    <span
+                      className={`text-lg hover:font-black transition-transform  font-medium ml-3  2xl:opacity-100 duration-200 &&  ${
+                        pathname.includes("view-loans") &&
+                        " text-[#14543D] font-bold text-xl"
+                      } `}
+                    >
+                     View Loans
+                    </span>
+                  </div>
+                </NavLink>
+              </li>}
               {user?.user?.isAdmin && <li
                 className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
                   pathname.includes("view-contribution") &&
@@ -197,15 +263,15 @@ function Sidebar() {
               </li>}
               {user?.user?.isAdmin && <li
                 className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${
-                  pathname.includes("view-loans") &&
+                  pathname.includes("view-withdrawals") &&
                   "text-[#14543D] font-bold text-xl"
                 }`}
               >
                 <NavLink
                   end
-                  to="/view-loans"
+                  to="/view-withdrawals"
                   className={`block text-[#707070]  hover:text-[#E67719] pb-2 pt-2 truncate transition duration-150 ${
-                    pathname.includes("view-loans") && "hover:text-black"
+                    pathname.includes("view-withdrawals") && "hover:text-black"
                   }`}
                 >
                   <div className="flex items-center">
@@ -213,18 +279,18 @@ function Sidebar() {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 640 512"
                       className={`shrink-0 h-8 w-8 fill-slate-400  hover:fill-[#E67719] &&  ${
-                        pathname.includes("view-loans") && " fill-[#14543D]"
+                        pathname.includes("view-contribution") && " fill-[#14543D]"
                       } `}
                     >
                       <path d="M608 320h-64v64h22.4c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8H96v-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h576c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32zm-96 64V64.3c0-17.9-14.5-32.3-32.3-32.3H160.4C142.5 32 128 46.5 128 64.3V384h384zM211.2 202l25.5-25.3c4.2-4.2 11-4.2 15.2.1l41.3 41.6 95.2-94.4c4.2-4.2 11-4.2 15.2.1l25.3 25.5c4.2 4.2 4.2 11-.1 15.2L300.5 292c-4.2 4.2-11 4.2-15.2-.1l-74.1-74.7c-4.3-4.2-4.2-11 0-15.2z" />
                     </svg>
                     <span
                       className={`text-lg hover:font-black transition-transform  font-medium ml-3  2xl:opacity-100 duration-200 &&  ${
-                        pathname.includes("view-loans") &&
+                        pathname.includes("view-withdrawals") &&
                         " text-[#14543D] font-bold text-xl"
                       } `}
                     >
-                     View Loans
+                     View Withdrawals
                     </span>
                   </div>
                 </NavLink>

@@ -19,6 +19,10 @@ export const ModalsContext = createContext({
   setUserLoanId: () => {},
   userLoanModal: {},
   setUserLoanModal: () => {},
+  withdrawalModal: {},
+  setWithdrawalModal: () => {},
+  withdrawalId: {},
+  setWithdrawalId: () => {},
 });
 
 export const ModalsProvider = ({ children }) => {
@@ -33,6 +37,8 @@ export const ModalsProvider = ({ children }) => {
   const [usersId, setUsersId]=useState("")
   const [userLoanId, setUserLoanId]=useState("")
   const [userLoanModal,setUserLoanModal]=useState(false)
+  const [withdrawlId, setWithdrawalId] = useState("");
+  const [withdrawalModal, setWithdrawalModal] = useState(false);
   useEffect(() => console.log("mod", contributionModal), []);
 
   const value = {
@@ -51,7 +57,11 @@ export const ModalsProvider = ({ children }) => {
     userLoanId,
     setUserLoanId,
     userLoanModal,
-    setUserLoanModal
+    setUserLoanModal,
+    withdrawalModal,
+    setWithdrawalModal,
+    withdrawlId,
+    setWithdrawalId
     
   };
   return (

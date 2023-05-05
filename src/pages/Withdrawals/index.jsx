@@ -1,35 +1,29 @@
-
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState } from "react";
-import ContributionTable from "../../components/Tables/ContributionTable";
+
+import UserWithdrawalCards from "../../components/Cards/UserWithdrawalCards";
+import WithdrawalTable from "../../components/Tables/WithdrawalTable";
 import useApi from "../../hooks/useApi";
-import UserContributionCards from "../../components/Cards/UserContributionCard";
 
-const Contributions = () => {
+const Withdrawals = () => {
   const [data] = useApi(
-    "https://thriftandloan.onrender.com/api/transaction/mycontribution"
+    "https://thriftandloan.onrender.com/api/member/userprofile"
   );
-  console.log("contru", data);
-
+  console.log("hmm", data);
   const [amount, setAmount] = useState("");
-  const [transId, setTransId] = useState("");
-  const [paymentType, setPaymentType] = useState("");
- 
-
+  const [account, setAccount] = useState("");
 
   const user = useAuthContext();
   const token = user?.user?.token;
 
-
   async function handleSubmit(e) {
-  
     e.preventDefault();
 
     await axios
       .post(
-        `https://thriftandloan.onrender.com/api/transaction/deposit`,
-        { amount: amount, transactionCode: transId, paymentType:paymentType },
+        `https://thriftandloan.onrender.com/api/transaction/withdraw`,
+        { amount: amount, beneficiaryAccount: account },
         {
           headers: {
             "x-auth-token": token,
@@ -38,25 +32,23 @@ const Contributions = () => {
       )
       .then((result) => {
         console.log("Post request, results", result);
-  
       })
       .catch((error) => {
         console.log("Errors", error);
-  
       });
   }
 
   return (
     <>
       <main className="bg-white  p-5 lg:p-10">
-       
         <div>
-          <UserContributionCards data={data}/>
+          <UserWithdrawalCards />
         </div>
-        <header>
+        <header className="py-2">
           <h1 className="text-3xl font-semibold text-[#1E4CA1] pt-5">
-           Start Contributing
+            Withdraw
           </h1>
+          <p className="text-lg font-medium text-black">{`Your total available amount for withdrawal is : ${data?.contri_amount}`}</p>
         </header>
         <form onSubmit={handleSubmit}>
           <div className="w-full  rounded-lg mx-auto  flex overflow-hidden  rounded-b-none ">
@@ -64,10 +56,11 @@ const Contributions = () => {
               <hr className="border-gray-200" />
               <div className="py-4 ">
                 <label htmlFor="amount" className="text-sm text-black">
-                 Amount
+                  Amount
                 </label>
                 <input
                   placeholder="Amount in Naira"
+                  max={data?.contri_amount}
                   className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
                   type="number"
                   name="amount"
@@ -78,54 +71,36 @@ const Contributions = () => {
               <hr className="border-gray-200" />
               <div className="py-4 ">
                 <label htmlFor="term" className="text-sm text-black">
-                  Transaction ID
+                  Beneficary Account
                 </label>
                 <input
-                  placeholder="Transacation ID"
+                  placeholder="Account Number"
                   className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
                   type="number"
                   name="term"
-                  value={transId}
-                  onChange={(e) => setTransId(e.target.value)}
+                  value={account}
+                  onChange={(e) => setAccount(e.target.value)}
                 />
-              </div>
-              <div className="py-4 ">
-              <div className="flex flex-col ">
-                <label
-                  htmlFor="savings"
-                  className="text-black text-sm font-semibold pb-2"
-                >
-                  Payment Type:
-                </label>
-                <select
-                  name="savings"
-                  id=""
-                  className=" text-center  bg-gray-200   w-full border rounded placeholder:text-md placeholder:text-black  py-2 text-black transition focus:outline-none"
-                  onChange={(e) => setPaymentType(e.target.value)}
-                  required
-                >
-                  <option value="">Select your Type</option>
-                  <option value="Transfer">Transfer</option>
-                  <option value="Deposit">Deposit</option>
-                 
-                </select>
-              </div>
               </div>
 
               <div className=" pt-2 md:pt-5  rounded-b-lg border-t border-gray-200 flex justify-end">
-                <button  className={ "bg-gradient-to-r from-[#6DBF58] to-[#1E4CA0] hover:bg-gradient-to-l hover:from-[#6DBF58] hover:to-[#1E4CA0] transition-colors ease-in-out rounded-md text-white px-4 py-2 flex justify-center"}>
-                Submit
+                <button
+                  className={
+                    "bg-gradient-to-r from-[#6DBF58] to-[#1E4CA0] hover:bg-gradient-to-l hover:from-[#6DBF58] hover:to-[#1E4CA0] transition-colors ease-in-out rounded-md text-white px-4 py-2 flex justify-center"
+                  }
+                >
+                  Submit
                 </button>
               </div>
             </div>
           </div>
         </form>
         <div className="pt-10">
-          <ContributionTable data={data}/>
+          <WithdrawalTable />
         </div>
       </main>
     </>
   );
 };
 
-export default Contributions;
+export default Withdrawals;
