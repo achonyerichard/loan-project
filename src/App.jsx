@@ -25,10 +25,11 @@ function App() {
         element={!user ? <Register /> : <Navigate to="profile" />}
       />
       <Route path="/unauthorized" element={<UnAuthorized />} />
-      <Route path="/" element={user ? <Layout /> : <Navigate to="/" />}>
+      <Route path="/" element={user && <Layout /> }>
         <Route
           path="profile"
-         index element={user ? <Profile /> : <Navigate to="/" />}
+          
+          element={user ? <Profile /> : <Navigate to="/" />}
         />
         {!user?.admin && (
           <Route path="home" element={user ? <Home /> : <Navigate to="/" />} />

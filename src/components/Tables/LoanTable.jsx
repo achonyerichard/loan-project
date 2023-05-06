@@ -90,7 +90,7 @@ const LoanTable = ({ setUserLoanId, setUserLoanModal }) => {
                     </span>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <button
+                  { item?.status.toLowerCase() != "paid_off" &&  <button
                       onClick={() => modalClick(item?.id)}
                       className={
                         "relative inline-block px-3 py-1 font-semibold text-white leading-tight"
@@ -103,7 +103,7 @@ const LoanTable = ({ setUserLoanId, setUserLoanModal }) => {
                         }
                       ></span>
                       <span className="relative capitalize">Pay Loan</span>
-                    </button>
+                    </button>}
                   </td>
                 </tr>
               ))}

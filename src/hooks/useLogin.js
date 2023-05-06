@@ -24,9 +24,9 @@ const useLogin = (props) => {
       );
       const res = response.data;
       setLoading(false);
-      if (res) {
-        setSuccess("Login Successful");
-      }
+
+      setSuccess("Login Successful");
+
       localStorage.setItem("user", JSON.stringify(res));
 
       dispatch({ type: "LOGIN", payload: res });
