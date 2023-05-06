@@ -44,9 +44,9 @@ function Sidebar() {
             aria-controls="sidebar"
             aria-expanded={sidebarOpen}
           >
-            <span className="sr-only">Close sidebar</span>
+            <span className="sr-only ">Close sidebar</span>
             <svg
-              className="w-6 h-6 fill-current"
+              className="w-6 h-6 fill-black"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -66,8 +66,8 @@ function Sidebar() {
         {/* Links */}
         <div
           className={`space-y-12 ${
-            sidebarExpanded && "px-2 md:mt-28"
-          } px-5 mt-10`}
+            sidebarExpanded && "px-2 mt-28"
+          } px-5 md:mt-10 `}
         >
           {/* Pages group */}
           <div>
