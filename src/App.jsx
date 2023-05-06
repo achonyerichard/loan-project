@@ -28,7 +28,7 @@ function App() {
       <Route path="/" element={user ? <Layout /> : <Navigate to="/" />}>
         <Route
           path="profile"
-          element={user ? <Profile /> : <Navigate to="/" />}
+         index element={user ? <Profile /> : <Navigate to="/" />}
         />
         {!user?.admin && (
           <Route path="home" element={user ? <Home /> : <Navigate to="/" />} />
@@ -37,7 +37,7 @@ function App() {
           path="contributions"
           element={user ? <Contributions /> : <Navigate to="/" />}
         />
-<Route
+        <Route
           path="withdraw"
           element={user ? <Withdrawals /> : <Navigate to="/" />}
         />
@@ -45,15 +45,15 @@ function App() {
           path="view-contribution"
           element={user ? <ViewContributions /> : <Navigate to="/" />}
         />
-         <Route
+        <Route
           path="view-withdrawals"
           element={user ? <ViewWithdrawal /> : <Navigate to="/" />}
         />
-         <Route
+        <Route
           path="view-loans"
           element={user ? <ViewLoans /> : <Navigate to="/" />}
         />
-          <Route
+        <Route
           path="users"
           element={user ? <ViewUsers /> : <Navigate to="/" />}
         />

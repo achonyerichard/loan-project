@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import UserWithdrawalCards from "../../components/Cards/UserWithdrawalCards";
 import WithdrawalTable from "../../components/Tables/WithdrawalTable";
 import useApi from "../../hooks/useApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Withdrawals = () => {
   const [data] = useApi(
@@ -13,34 +15,78 @@ const Withdrawals = () => {
   console.log("hmm", data);
   const [amount, setAmount] = useState("");
   const [account, setAccount] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const user = useAuthContext();
   const token = user?.user?.token;
+ 
 
   async function handleSubmit(e) {
-    e.preventDefault();
+   
+    
+      setLoading(true)
+      e.preventDefault();
+      try{
+        const response = await axios
+           .post(
+             `https://thriftandloan.onrender.com/api/transaction/withdraw`,
+             { amount: amount, beneficiaryAccount: account },
+             {
+               headers: {
+                 "x-auth-token": token,
+               },
+             }
+           )
+         const res = response.data
+           console.log(res);
+           setLoading(false)
+           setSuccess("Submitted Successfully")
+           setAmount("")
+           setAccount("")
+         }
+           catch(error) {
+             const res = error.response;
+           setLoading(false);
+           setError(res.data);
+           setAmount("")
+           setAccount("")
+           }
+           finally{
+             setLoading(false)
+           }
+    
+   
 
-    await axios
-      .post(
-        `https://thriftandloan.onrender.com/api/transaction/withdraw`,
-        { amount: amount, beneficiaryAccount: account },
-        {
-          headers: {
-            "x-auth-token": token,
-          },
-        }
-      )
-      .then((result) => {
-        console.log("Post request, results", result);
-      })
-      .catch((error) => {
-        console.log("Errors", error);
-      });
   }
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (success) {
+      toast.success(success, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [error, success]);
   return (
     <>
       <main className="bg-white  p-5 lg:p-10">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
         <div>
           <UserWithdrawalCards />
         </div>
@@ -60,7 +106,7 @@ const Withdrawals = () => {
                 </label>
                 <input
                   placeholder="Amount in Naira"
-                  max={data?.contri_amount}
+            required
                   className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
                   type="number"
                   name="amount"
@@ -74,6 +120,7 @@ const Withdrawals = () => {
                   Beneficary Account
                 </label>
                 <input
+                required
                   placeholder="Account Number"
                   className=" text-center  bg-gray-200   w-full border rounded placeholder:text-lg placeholder:text-black  py-2 text-black transition focus:outline-none"
                   type="number"
@@ -85,11 +132,12 @@ const Withdrawals = () => {
 
               <div className=" pt-2 md:pt-5  rounded-b-lg border-t border-gray-200 flex justify-end">
                 <button
+                disabled={loading}
                   className={
                     "bg-gradient-to-r from-[#6DBF58] to-[#1E4CA0] hover:bg-gradient-to-l hover:from-[#6DBF58] hover:to-[#1E4CA0] transition-colors ease-in-out rounded-md text-white px-4 py-2 flex justify-center"
                   }
                 >
-                  Submit
+                 {loading ?"Loading": "Submit"}
                 </button>
               </div>
             </div>
