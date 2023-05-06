@@ -72,6 +72,8 @@ const Withdrawals = () => {
       });
     }
   }, [error, success]);
+
+ 
   return (
     <>
       <main className="bg-white  p-5 lg:p-10">

@@ -40,7 +40,7 @@ const Contributions = () => {
       )
       .then((result) => {
         console.log("Post request, results", result);
-        window.location.reload();
+       
         setLoading(false)
         setSuccess(result.data);
         setAmount("")
