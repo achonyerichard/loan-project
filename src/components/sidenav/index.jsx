@@ -56,7 +56,7 @@ function Sidebar() {
           {/* Logo */}
           <NavLink end to="/home" className="block pt-2">
             <img
-              className={`${sidebarExpanded && "w-40"}w-60`}
+              className={`${sidebarExpanded && "w-20"}w-60`}
               src="/logo.png"
               alt="logo2"
             />
