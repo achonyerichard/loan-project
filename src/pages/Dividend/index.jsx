@@ -22,7 +22,7 @@ const Dividend = () => {
       type: "pie",
       height: 350,
     },
-    labels: data.map((item) => item?.member_id),
+    labels: data.map((item) => `${item?.firstname}  ${item?.lastname}`),
     style: {
       fontSize: "12px",
       fontFamily: "Helvetica, Arial, sans-serif",
