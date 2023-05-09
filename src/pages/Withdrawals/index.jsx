@@ -11,7 +11,7 @@ import ngBanks from "ng-banks"
 
 const Withdrawals = () => {
   const [data] = useApi(
-    "https://thriftandloan.onrender.com/api/member/userprofile"
+    "https://thriftandloan.onrender.com/api/saving/contribution/balance"
   );
   console.log("hmm", data);
   const [amount, setAmount] = useState("");
@@ -102,7 +102,7 @@ const Withdrawals = () => {
           <h1 className="text-3xl font-semibold text-[#1E4CA1] pt-5">
             Withdraw
           </h1>
-          <p className="text-lg font-medium text-black">{`Your total available amount for withdrawal is : ${data?.contri_amount}`}</p>
+          <p className="text-lg font-medium text-black">{`Your total available amount for withdrawal is : ${data[0]?.balance}`}</p>
         </header>
         <form onSubmit={handleSubmit}>
           <div className="w-full  rounded-lg mx-auto  flex overflow-hidden  rounded-b-none ">

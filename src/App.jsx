@@ -13,6 +13,7 @@ import ViewLoans from "./pages/ViewLoans";
 import ViewUsers from "./pages/ViewUsers";
 import Withdrawals from "./pages/Withdrawals";
 import ViewWithdrawal from "./pages/ViewWithdrawal";
+import Dividend from "./pages/Dividend";
 
 function App() {
   const { user } = useAuthContext();
@@ -57,6 +58,10 @@ function App() {
         <Route
           path="users"
           element={user ? <ViewUsers /> : <Navigate to="/" />}
+        />
+        <Route
+          path="dividend"
+          element={user ? <Dividend /> : <Navigate to="/" />}
         />
       </Route>
     </Routes>
