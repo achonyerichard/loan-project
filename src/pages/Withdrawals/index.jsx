@@ -7,6 +7,7 @@ import WithdrawalTable from "../../components/Tables/WithdrawalTable";
 import useApi from "../../hooks/useApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ngBanks from "ng-banks"
 
 const Withdrawals = () => {
   const [data] = useApi(
@@ -18,10 +19,13 @@ const Withdrawals = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedBank, setSelectedBank] = useState("")
 
   const user = useAuthContext();
   const token = user?.user?.token;
- 
+
+  const banks = ngBanks.getBanks();
+  console.log("Banks",banks);
 
   async function handleSubmit(e) {
    
@@ -32,7 +36,7 @@ const Withdrawals = () => {
         const response = await axios
            .post(
              `https://thriftandloan.onrender.com/api/transaction/withdraw`,
-             { amount: amount, beneficiaryAccount: account },
+             { amount: amount, beneficiaryAccount: account,bank:selectedBank },
              {
                headers: {
                  "x-auth-token": token,
@@ -45,6 +49,7 @@ const Withdrawals = () => {
            setSuccess("Submitted Successfully")
            setAmount("")
            setAccount("")
+           setSelectedBank("")
          }
            catch(error) {
              const res = error.response;
@@ -52,6 +57,7 @@ const Withdrawals = () => {
            setError(res.data);
            setAmount("")
            setAccount("")
+           setSelectedBank("")
            }
            finally{
              setLoading(false)
@@ -116,6 +122,29 @@ const Withdrawals = () => {
                   onChange={(e) => setAmount(e.target.value)}
                 />
               </div>
+              <div className="w-full ">
+              <div className="flex flex-col ">
+                <label
+                  htmlFor="states"
+                  className="text-black text-sm font-semibold pb-2"
+                >
+                  Bank:
+                </label>
+                <select
+                  id="state-select"
+                  className=" text-center  bg-gray-200   w-full border rounded placeholder:text-md placeholder:text-black  py-2 text-black transition focus:outline-none"
+                  value={selectedBank}
+                  onChange={(e) => setSelectedBank(e.target.value)}
+                >
+                  <option value="">Select Bank</option>
+                  {banks.map((bank) => (
+                    <option key={bank?.name} value={bank?.name}>
+                      {bank?.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
               <hr className="border-gray-200" />
               <div className="py-4 ">
                 <label htmlFor="term" className="text-sm text-black">
