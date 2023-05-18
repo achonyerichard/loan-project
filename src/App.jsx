@@ -20,48 +20,48 @@ function App() {
 
   return (
     <Routes>
-      <Route index element={!user ? <SignIn /> : <Navigate to="profile" />} />
+      <Route path="/login" element={!user ? <SignIn /> : <Navigate to="/profile" />} />
       <Route
         path="/register"
-        element={!user ? <Register /> : <Navigate to="profile" />}
+        element={!user ? <Register /> : <Navigate to="/profile" />}
       />
       <Route path="/unauthorized" element={<UnAuthorized />} />
-      <Route path="/" element={user && <Layout /> }>
+      <Route path="/" element={ <Layout /> }>
         <Route
           path="profile"
-          
-          element={user ? <Profile /> : <Navigate to="/" />}
+          index
+          element={user ? <Profile /> : <Navigate to="/login" />}
         />
         {!user?.admin && (
-          <Route path="home" element={user ? <Home /> : <Navigate to="/" />} />
+          <Route path="home" element={user ? <Home /> : <Navigate to="/login" />} />
         )}
         <Route
           path="contributions"
-          element={user ? <Contributions /> : <Navigate to="/" />}
+          element={user ? <Contributions /> : <Navigate to="/login" />}
         />
         <Route
           path="withdraw"
-          element={user ? <Withdrawals /> : <Navigate to="/" />}
+          element={user ? <Withdrawals /> : <Navigate to="/login" />}
         />
         <Route
           path="view-contribution"
-          element={user ? <ViewContributions /> : <Navigate to="/" />}
+          element={user ? <ViewContributions /> : <Navigate to="/login" />}
         />
         <Route
           path="view-withdrawals"
-          element={user ? <ViewWithdrawal /> : <Navigate to="/" />}
+          element={user ? <ViewWithdrawal /> : <Navigate to="/login" />}
         />
         <Route
           path="view-loans"
-          element={user ? <ViewLoans /> : <Navigate to="/" />}
+          element={user ? <ViewLoans /> : <Navigate to="/login" />}
         />
         <Route
           path="users"
-          element={user ? <ViewUsers /> : <Navigate to="/" />}
+          element={user ? <ViewUsers /> : <Navigate to="/login" />}
         />
         <Route
           path="dividend"
-          element={user ? <Dividend /> : <Navigate to="/" />}
+          element={user ? <Dividend /> : <Navigate to="/login" />}
         />
       </Route>
     </Routes>

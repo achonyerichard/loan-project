@@ -71,7 +71,7 @@ function Sidebar() {
         >
           {/* Pages group */}
           <div>
-            <ul className="space-y-4">
+            <ul className="space-y-2">
               {/* Dashboard */}
 
               {!user?.user?.isAdmin && (
@@ -161,8 +161,8 @@ function Sidebar() {
                   className={`px-3 ${
                     sidebarExpanded && "px-0"
                   } py-2 rounded-sm mb-0.5 last:mb-0 ${
-                    pathname.includes("@") && "text-[#14543D] font-bold text-xl"
-                  }`}
+                    pathname.includes("@") && "text-[#14543D] font-bold text-xl" 
+                  }${!user?.user?.isAdmin && "hidden"}`}
                 >
                   <NavLink
                     end
@@ -195,46 +195,7 @@ function Sidebar() {
                   </NavLink>
                 </li>
               )}
-                {!user?.user?.isAdmin && (
-                <li
-                  onClick={() => setSidebarOpen(false)}
-                  className={`px-3 ${
-                    sidebarExpanded && "px-0"
-                  } py-2 rounded-sm mb-0.5 last:mb-0 ${
-                    pathname.includes("@") && "text-[#14543D] font-bold text-xl"
-                  }`}
-                >
-                  <NavLink
-                    end
-                    to="/dividend"
-                    className={`block text-[#707070]  hover:text-[#E67719] pb-2 pt-2 truncate transition duration-150 ${
-                      pathname.includes("dividend") && "hover:text-black"
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`shrink-0 h-8 w-8 fill-slate-400  hover:fill-[#E67719] &&  ${
-                          pathname.includes("dividend") && " fill-[#14543D]"
-                        } `}
-                        viewBox="0 0 576 512"
-                      >
-                        <path d="M560 224h-29.5c-8.8-20-21.6-37.7-37.4-52.5L512 96h-32c-29.4 0-55.4 13.5-73 34.3-7.6-1.1-15.1-2.3-23-2.3H256c-77.4 0-141.9 55-156.8 128H56c-14.8 0-26.5-13.5-23.5-28.8C34.7 215.8 45.4 208 57 208h1c3.3 0 6-2.7 6-6v-20c0-3.3-2.7-6-6-6-28.5 0-53.9 20.4-57.5 48.6C-3.9 258.8 22.7 288 56 288h40c0 52.2 25.4 98.1 64 127.3V496c0 8.8 7.2 16 16 16h64c8.8 0 16-7.2 16-16v-48h128v48c0 8.8 7.2 16 16 16h64c8.8 0 16-7.2 16-16v-80.7c11.8-8.9 22.3-19.4 31.3-31.3H560c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16zm-128 64c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM256 96h128c5.4 0 10.7.4 15.9.8 0-.3.1-.5.1-.8 0-53-43-96-96-96s-96 43-96 96c0 2.1.5 4.1.6 6.2 15.2-3.9 31-6.2 47.4-6.2z" />
-                      </svg>
-                      <span
-                        className={`text-lg hover:font-black transition-transform  font-medium ml-3  2xl:opacity-100 duration-200 && ${
-                          sidebarExpanded && "hidden"
-                        }  ${
-                          pathname.includes("dividend") &&
-                          " text-[#14543D] font-bold text-xl"
-                        } `}
-                      >
-                        Dividend
-                      </span>
-                    </div>
-                  </NavLink>
-                </li>
-              )}
+               
               <li
                 onClick={() => setSidebarOpen(false)}
                 className={`px-3 ${
@@ -274,6 +235,46 @@ function Sidebar() {
                   </div>
                 </NavLink>
               </li>
+              {user?.user?.isAdmin && (
+                <li
+                  onClick={() => setSidebarOpen(false)}
+                  className={`px-3 ${
+                    sidebarExpanded && "px-0"
+                  } py-2 rounded-sm mb-0.5 last:mb-0 ${
+                    pathname.includes("@") && "text-[#14543D] font-bold text-xl"
+                  }`}
+                >
+                  <NavLink
+                    end
+                    to="/dividend"
+                    className={`block text-[#707070]  hover:text-[#E67719] pb-2 pt-2 truncate transition duration-150 ${
+                      pathname.includes("dividend") && "hover:text-black"
+                    }`}
+                  >
+                    <div className="flex items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`shrink-0 h-8 w-8 fill-slate-400  hover:fill-[#E67719] &&  ${
+                          pathname.includes("dividend") && " fill-[#14543D]"
+                        } `}
+                        viewBox="0 0 576 512"
+                      >
+                        <path d="M560 224h-29.5c-8.8-20-21.6-37.7-37.4-52.5L512 96h-32c-29.4 0-55.4 13.5-73 34.3-7.6-1.1-15.1-2.3-23-2.3H256c-77.4 0-141.9 55-156.8 128H56c-14.8 0-26.5-13.5-23.5-28.8C34.7 215.8 45.4 208 57 208h1c3.3 0 6-2.7 6-6v-20c0-3.3-2.7-6-6-6-28.5 0-53.9 20.4-57.5 48.6C-3.9 258.8 22.7 288 56 288h40c0 52.2 25.4 98.1 64 127.3V496c0 8.8 7.2 16 16 16h64c8.8 0 16-7.2 16-16v-48h128v48c0 8.8 7.2 16 16 16h64c8.8 0 16-7.2 16-16v-80.7c11.8-8.9 22.3-19.4 31.3-31.3H560c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16zm-128 64c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM256 96h128c5.4 0 10.7.4 15.9.8 0-.3.1-.5.1-.8 0-53-43-96-96-96s-96 43-96 96c0 2.1.5 4.1.6 6.2 15.2-3.9 31-6.2 47.4-6.2z" />
+                      </svg>
+                      <span
+                        className={`text-lg hover:font-black transition-transform  font-medium ml-3  2xl:opacity-100 duration-200 && ${
+                          sidebarExpanded && "hidden"
+                        }  ${
+                          pathname.includes("dividend") &&
+                          " text-[#14543D] font-bold text-xl"
+                        } `}
+                      >
+                        Dividend
+                      </span>
+                    </div>
+                  </NavLink>
+                </li>
+              )}
               {user?.user?.isAdmin && (
                 <li
                   onClick={() => setSidebarOpen(false)}

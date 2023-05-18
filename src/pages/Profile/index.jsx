@@ -5,6 +5,7 @@ import useApi from "../../hooks/useApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -70,6 +71,7 @@ const Profile = () => {
   }, [error, success]);
   return (
     <>
+   
       <main className="bg-white  p-5 lg:p-10">
         <ToastContainer
           position="top-right"
@@ -149,6 +151,7 @@ const Profile = () => {
         </form>
         
       </main>
+    
     </>
   );
 };
